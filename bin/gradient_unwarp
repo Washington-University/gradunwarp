@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ##
+#
+#   See COPYING file distributed along with the gradunwarp package for the
+#   copyright and license terms.
+#
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ##
+
+from gradunwarp.core.gradient_unwarp import argument_parse_gradunwarp, GradientUnwarpRunner
+
+if __name__ == '__main__':
+    args = argument_parse_gradunwarp()
+
+    grad_unwarp = GradientUnwarpRunner(args)
+
+    grad_unwarp.run()
+
+    grad_unwarp.write()

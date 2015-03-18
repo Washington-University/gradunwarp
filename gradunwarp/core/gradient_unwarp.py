@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ##
 #
 #   See COPYING file distributed along with the gradunwarp package for the
@@ -113,12 +112,3 @@ class GradientUnwarpRunner(object):
     def write(self):
         self.unwarper.write(self.args.outfile)
 
-
-if __name__ == '__main__':
-    args = argument_parse_gradunwarp()
-
-    grad_unwarp = GradientUnwarpRunner(args)
-
-    grad_unwarp.run()
-
-    grad_unwarp.write()

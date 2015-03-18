@@ -57,13 +57,13 @@ In that case, make sure your `PATH` has `/home/foo/bin` and make sure the
 
 skeleton
 
-    gradient_unwarp.py infile outfile manufacturer -g <coefficient file> [optional arguments]
+    gradient_unwarp infile outfile manufacturer -g <coefficient file> [optional arguments]
 
 typical usage
 
-    gradient_unwarp.py sonata.mgh testoutson.mgh siemens -g coeff_Sonata.grad  --fovmin -.15 --fovmax .15 --numpoints 40
+    gradient_unwarp sonata.mgh testoutson.mgh siemens -g coeff_Sonata.grad  --fovmin -.15 --fovmax .15 --numpoints 40
 
-    gradient_unwarp.py avanto.mgh testoutava.mgh siemens -g coeff_AS05.grad -n
+    gradient_unwarp avanto.mgh testoutava.mgh siemens -g coeff_AS05.grad -n
 
 ### Positional Arguments
 

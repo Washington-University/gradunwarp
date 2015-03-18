@@ -31,7 +31,7 @@ ext3 = Extension('gradunwarp.core.transform_coordinates_ext',
                  sources = ['gradunwarp/core/transform_coordinates_ext.c'],
                  extra_compile_args=['-O3'])
 
-scripts_cmd = ['gradunwarp/core/gradient_unwarp.py',]
+scripts_cmd = ['bin/gradient_unwarp',]
         
 
 def configuration(parent_package='', top_path=None):
