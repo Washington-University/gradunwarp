@@ -217,7 +217,7 @@ class Unwarper(object):
             
             vs = np.ones(vr.shape) * s
             vrcs = CV(vr, vc, vs)
-            vxyz = utils.transform_coordinates(vrcs, m_rcs2lai_nohalf)
+            vxyz = utils.transform_coordinates(vrcs, m_rcs2lai)
             vrcsg = utils.transform_coordinates(vxyz, g_xyz2rcs)
             ndimage.interpolation.map_coordinates(dv.x,
                                                   vrcsg,
