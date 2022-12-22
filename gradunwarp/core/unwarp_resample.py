@@ -114,7 +114,7 @@ class Unwarper(object):
         m_ras2lai = np.array([[-1.0, 0.0, 0.0, 0.0],
                              [0.0, 1.0, 0.0, 0.0],
                              [0.0, 0.0, -1.0, 0.0],
-                             [0.0, 0.0, 0.0, 1.0]], dtype=np.float)
+                             [0.0, 0.0, 0.0, 1.0]], dtype=np.float64)
         m_rcs2lai = np.dot(m_ras2lai, self.m_rcs2ras)
         m_rcs2lai_nohalf = m_rcs2lai[:, :]
 
@@ -215,12 +215,12 @@ class Unwarper(object):
             m_vox2fsl = np.array([[-1.0*pixdim1, 0.0, 0.0, pixdim1*(dim1-1)],
                               [0.0, pixdim2, 0.0, 0.0],
                               [0.0, 0.0, pixdim3, 0.0],
-                              [0.0, 0.0, 0.0, 1.0]], dtype=np.float)
+                              [0.0, 0.0, 0.0, 1.0]], dtype=np.float64)
         else:
             m_vox2fsl = np.array([[pixdim1, 0.0, 0.0, 0.0],
                               [0.0, pixdim2, 0.0, 0.0],
                               [0.0, 0.0, pixdim3, 0.0],
-                              [0.0, 0.0, 0.0, 1.0]], dtype=np.float)
+                              [0.0, 0.0, 0.0, 1.0]], dtype=np.float64)
 															
         log.info('Unwarping slice by slice')
         # for every slice
