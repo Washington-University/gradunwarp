@@ -13,30 +13,54 @@ for use within the [HCP Minimal Preprocessing Pipelines][HCP Pipelines].
 
 ## Installation
 
-### Prerequisites
-
+### Install for all users
 You can install the necessary prerequisites in most Ubuntu or Debian-based distributions with this command:
+```bash
+sudo apt install python3-numpy python3-pip
 ```
-sudo apt-get install python3-numpy python3-pip
-```
-
-### Install
 
 For convenience the latest gradunwarp tarball can be downloaded from [here][gradunwarp-hcp-tarball].
 
 First, extract the gradunwarp tarball, and `cd` into the folder it creates. Then do:
-```
+```bash
+sudo pip3 install -r requirements.txt
 sudo pip3 install .
 ```
-If you don't have superuser permissions on the machine, you can use the `--user` switch of pip install:
-```
+
+#### Install with only user permissions
+If you don't have superuser permissions on the machine, you can use the `--user` switch of pip install instead of using `sudo`:
+```bash
+pip3 install -r requirements.txt --user
 pip3 install . --user
 ```
 If you use the `--user` switch, you will need to add `/home/<username>/.local/bin` to your `PATH` environment variable, replacing `<username>` with your user name.
 
-#### Details
+### Install using a virtual environment
+If the [python virtual environment module](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments) is not already installed, then you may need to run
+```bash
+sudo apt install python3-venv
+```
+before running the below.
 
-If you are on an old distribution that doesn't have the necessary versions of nibabel and its dependencies, here are the details of what you need:
+First, extract the gradunwarp tarball, and `cd` into the folder it creates. Then do:
+```bash
+python3 -m venv gradunwarp.build
+source gradunwarp.build/bin/activate
+pip3 install -r requirements.txt
+pip3 install . --no-cache-dir --no-binary=gradunwarp
+deactivate
+```
+The arguments `--no-cache-dir --no-binary=gradunwarp` are required to suppress a warning arising from the version name of gradunwarp not complying with [python formatting rules](https://peps.python.org/pep-0440/).
+The command `deactivate` ensures that your python environment is set to the way it was before.
+
+After this installation, you can then use gradunwarp by adding
+```
+source "$PATH_TO_INSTALLATION"/gradunwarp.build/bin/activate
+```
+to your scripts, where `"$PATH_TO_INSTALLATION"` should be replaced with the path where you installed gradunwarp.
+Note that you may need to `deactivate` the virtual environment after running gradunwarp in your scripts to use other environments.
+
+### Dependencies
 
 * Python (>=2.7 or 3.x)
 * [Numpy][Numpy]
