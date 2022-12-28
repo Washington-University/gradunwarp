@@ -1,3 +1,0 @@
-nibabel>=2.0
-numpy
-scipy

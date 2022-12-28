@@ -68,11 +68,11 @@ Then do:
 ```bash
 virtualenv -p python2 gradunwarp.build
 source gradunwarp.build/bin/activate
-pip install -r requirements_py2.txt
+pip install -r requirements.txt
 pip install . 
 deactivate
 ```
-Note that the requirements file is different and `virtualenv` is used instead of `venv`.
+Note that `virtualenv` is used instead of `venv`.
 
 This virtual environment can then be used in the same way as described for python3 above.
 
@@ -82,7 +82,7 @@ This virtual environment can then be used in the same way as described for pytho
 * [Numpy][Numpy]
 * [Scipy][Scipy]
 * Numpy devel package, if separate (to compile external modules written in C)
-* [nibabel][nibabel] (1.2.0 or later, for MGH support)
+* [nibabel][nibabel] (2.0 or later for python2.7, 3.2.1 or later for python3.x)
 
 Dependencies of nibabel:
 
@@ -92,7 +92,7 @@ Dependencies of nibabel:
 
 ## Usage
 
-Note that a core component of `gradient_unwarp.py` (`unwarp_resample.py`) uses a `subprocess` call to the FSL tools `fslval` and `fslorient`. So FSL must be [installed][installed] and its configuration file correctly [sourced][sourced] (i.e., `FSLDIR` and `FSLOUTPUTTYPE` must be defined appropriately in your environment, and `${FSLDIR}/bin` must be in your `PATH` and contain `fslval`, `fslorient`, and `fslhd` -- this should be done for you by the SetUpHCPPipeline.sh script). FSLOUTPUTTYPE must be set to NIFTI_GZ, which is the default.
+Note that a core component of `gradient_unwarp.py` (`unwarp_resample.py`) uses a `subprocess` call to the FSL tools `fslval` and `fslorient`. So FSL must be [installed][installed] and its configuration file correctly [sourced][sourced] (i.e., `FSLDIR` and `FSLOUTPUTTYPE` must be defined appropriately in your environment, and `${FSLDIR}/bin` must be in your `PATH` and contain `fslval`, `fslorient`, and `fslhd` -- this should be done for you by the SetUpHCPPipeline.sh script). FSLOUTPUTTYPE must be set to NIFTI\_GZ, which is the default.
 
 skeleton
 
