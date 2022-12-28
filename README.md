@@ -46,11 +46,10 @@ First, extract the gradunwarp tarball, and `cd` into the folder it creates. Then
 ```bash
 python3 -m venv gradunwarp.build
 source gradunwarp.build/bin/activate
-pip3 install -r requirements.txt
-pip3 install . --no-cache-dir --no-binary=gradunwarp
+pip install -r requirements.txt
+pip install . 
 deactivate
 ```
-The arguments `--no-cache-dir --no-binary=gradunwarp` are required to suppress a warning arising from the version name of gradunwarp not complying with [python formatting rules](https://peps.python.org/pep-0440/).
 The command `deactivate` ensures that your python environment is set to the way it was before.
 
 After this installation, you can then use gradunwarp by adding
