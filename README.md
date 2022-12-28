@@ -42,7 +42,8 @@ sudo apt install python3-venv
 ```
 before running the below.
 
-First, extract the gradunwarp tarball, and `cd` into the folder it creates. Then do:
+First, extract the gradunwarp tarball, and `cd` into the folder it creates. 
+Then do:
 ```bash
 python3 -m venv gradunwarp.build
 source gradunwarp.build/bin/activate
@@ -58,6 +59,22 @@ source "$PATH_TO_INSTALLATION"/gradunwarp.build/bin/activate
 ```
 to your scripts, where `"$PATH_TO_INSTALLATION"` should be replaced with the path where you installed gradunwarp.
 Note that you may need to `deactivate` the virtual environment after running gradunwarp in your scripts to use other environments.
+
+#### Install using a virtual environment for python2
+Installation using python2 is slightly different to that for python3 above.
+
+As above extract the gradunwarp tarball, and `cd` into the folder it creates. 
+Then do:
+```bash
+virtualenv -p python2 gradunwarp.build
+source gradunwarp.build/bin/activate
+pip install -r requirements_py2.txt
+pip install . 
+deactivate
+```
+Note that the requirements file is different and `virtualenv` is used instead of `venv`.
+
+This virtual environment can then be used in the same way as described for python3 above.
 
 ### Dependencies
 
