@@ -36,6 +36,7 @@ pip3 install . --user
 If you use the `--user` switch, you will need to add `/home/<username>/.local/bin` to your `PATH` environment variable, replacing `<username>` with your user name.
 
 ### Install using a virtual environment
+You may optionally choose to install gradunwarp into a python virtual environment in order to avoid possible interference with your existing python setup.
 If the [python virtual environment module](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments) is not already installed, then you may need to run
 ```bash
 sudo apt install python3-venv
