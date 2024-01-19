@@ -36,3 +36,6 @@ push = false
 [tool.cibuildwheel]
 # Do not bother building pypy wheels
 skip = "pp*"
+
+[tool.ruff.extend-per-file-ignores]
+"*/__init__.py" = ["F401"]
