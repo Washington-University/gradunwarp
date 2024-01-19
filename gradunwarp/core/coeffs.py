@@ -92,6 +92,14 @@ def get_siemens_coef(cfile):
 def get_ge_coef(cfile):
     ''' Parse the GE .coef file.
     '''
+    # R0_m has never been defined in gradunwarp for this function
+    # This function would raise a NameError if it were ever called, so
+    # let's provide a meaningful runtime error.
+    raise RuntimeError(
+        "R0_m has never been defined in gradunwarp for this function. "
+        "If you know how to determine it, please contact the developers."
+    )
+
     txt_var_map = create_txt_var_map(ge_cas)
 
     coef_file_parse(cfile, txt_var_map)
@@ -103,7 +111,8 @@ def get_ge_coef(cfile):
         txt_var_map['beta_y'],
         txt_var_map['beta_x'],
         txt_var_map['beta_z'],
-        R0_m)
+        R0_m)  # noqa: F821
+
 
 def grad_file_parse(gfile, txt_var_map):
     xmax = 0
