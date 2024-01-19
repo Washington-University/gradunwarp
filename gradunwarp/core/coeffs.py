@@ -96,7 +96,7 @@ def get_siemens_coef(cfile):
 def get_ge_coef(cfile):
     ''' Parse the GE .coef file.
     '''
-    txt_var_map = create_txt_var_map(coef_array_sz)
+    txt_var_map = create_txt_var_map(ge_cas)
 
     coef_file_parse(cfile, txt_var_map)
 
