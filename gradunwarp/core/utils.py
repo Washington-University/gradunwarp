@@ -5,7 +5,6 @@
 #
 ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ##
 from collections import namedtuple
-import math
 
 import numpy as np
 import nibabel as nib
@@ -25,5 +24,3 @@ def transform_coordinates(A, M):
 def get_vol_affine(infile):
     nibimage = nib.load(infile)
     return np.asanyarray(nibimage.dataobj), nibimage.affine
-
-factorial = math.factorial

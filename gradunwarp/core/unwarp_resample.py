@@ -12,7 +12,6 @@ import logging
 from scipy import ndimage
 from . import utils
 from .utils import CoordsVector as CV
-from .utils import factorial
 from . import globals
 from .globals import siemens_max_det
 import nibabel as nib
@@ -382,8 +381,8 @@ def siemens_B(alpha, beta, r, cosine_theta, theta, phi, R0):
             # this is Siemens normalization
             if m > 0:
                 normfact = math.pow(-1, m) * \
-                math.sqrt(float((2 * n + 1) * factorial(n - m)) \
-                          / float(2 * factorial(n + m)))
+                math.sqrt(float((2 * n + 1) * math.factorial(n - m)) \
+                          / float(2 * math.factorial(n + m)))
                 _p *= normfact
             b += f * _p * f2
     return b
