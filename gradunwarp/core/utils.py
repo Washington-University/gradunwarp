@@ -4,11 +4,12 @@
 #   copyright and license terms.
 #
 ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ##
-from __future__ import print_function
-import numpy as np
 from collections import namedtuple
 import math
 
+import numpy as np
+import nibabel as nib
+from nibabel.affines import apply_affine
 
 # This is a container class that has 3 np.arrays which contain
 # the x, y and z coordinates respectively. For example, the output
@@ -17,18 +18,11 @@ import math
 # cv = CoordsVector(x=x, y=y, z=z)
 CoordsVector = namedtuple('CoordsVector', 'x, y, z')
 
-from nibabel.affines import apply_affine
-
 def transform_coordinates(A, M):
     transformed = apply_affine(M, np.stack(A).T).T
     return CoordsVector(*transformed)
 
 def get_vol_affine(infile):
-    try:
-        import nibabel as nib
-    except ImportError:
-        raise ImportError('gradunwarp needs nibabel for I/O of mgz/nifti files.'
-                          ' Please install')
     nibimage = nib.load(infile)
     return np.asanyarray(nibimage.dataobj), nibimage.affine
 
