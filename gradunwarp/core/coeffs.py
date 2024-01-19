@@ -43,19 +43,16 @@ def coef_file_parse(cfile, txt_var_map):
 
     modifies txt_var_map in place
     '''
-    # parse .coef file. Strip unneeded characters. a valid line in that file is
-    # broken into validline_list
-    coef_re = re.compile(r'^[^\#]')  # regex for first character not a '#'
-    coef_file = open(cfile, 'r')
-    for line in coef_file.readlines():
-        if coef_re.match(line):
-            validline_list = line.lstrip(' \t').rstrip(';\n').split()
-            if validline_list:
-                log.info('Parsed : %s' % validline_list)
-                l = validline_list
-                x = int(l[1])
-                y = int(l[2])
-                txt_var_map[l[0]][x, y] = float(l[3])
+    with open(cfile) as coef_file:
+        for line in coef_file:
+            if re.match(r'^[^#]', line):
+                validline = line.lstrip(' \t').rstrip(';\n')
+                if validline:
+                    fields = validline.split()
+                    log.info('Parsed : %s' % fields)
+                    x = int(fields[1])
+                    y = int(fields[2])
+                    txt_var_map[fields[0]][x, y] = float(fields[3])
 
 
 def get_siemens_coef(cfile):
