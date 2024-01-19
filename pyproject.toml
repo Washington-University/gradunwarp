@@ -24,7 +24,3 @@ push = false
 "gradunwarp/core/globals.py" = [
     "^VERSION = '{version}'"
 ]
-
-[tool.cibuildwheel]
-# Do not bother building pypy wheels
-skip = "pp*"
