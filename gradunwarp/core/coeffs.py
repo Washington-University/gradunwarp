@@ -9,7 +9,6 @@ from collections import namedtuple
 import numpy as np
 import logging
 import re
-from . import globals
 from .globals import siemens_cas, ge_cas
 
 

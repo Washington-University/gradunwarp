@@ -8,7 +8,6 @@ from __future__ import print_function
 import numpy as np
 from collections import namedtuple
 import math
-from math import sqrt, cos, pi
 
 
 # This is a container class that has 3 np.arrays which contain

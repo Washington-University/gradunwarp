@@ -2,9 +2,9 @@ import os
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
 
 import numpy as np
-from numpy.testing import assert_array_almost_equal, assert_allclose
+from numpy.testing import assert_array_almost_equal
 
-from gradunwarp.core import coeffs, utils
+from gradunwarp.core import coeffs
 from gradunwarp.core.unwarp_resample import siemens_B, cart2sph
 
 def test_siemens_B():
