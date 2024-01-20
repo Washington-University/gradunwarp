@@ -46,9 +46,8 @@ def coef_file_parse(cfile, txt_var_map):
     with open(cfile) as coef_file:
         for line in coef_file:
             if re.match(r'^[^#]', line):
-                validline = line.lstrip(' \t').rstrip(';\n')
-                if validline:
-                    fields = validline.split()
+                fields = line.lstrip(' \t').rstrip(';\n').split()
+                if fields:
                     log.info('Parsed : %s' % fields)
                     x = int(fields[1])
                     y = int(fields[2])
