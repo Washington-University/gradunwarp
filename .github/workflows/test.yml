@@ -117,7 +117,8 @@ jobs:
       - name: Set up Python ${{ matrix.python[1] }} (miniconda)
         uses: conda-incubator/setup-miniconda@v2
         with:
-          miniforge-version: latest
+          # OSX runners do not have a built-in conda, so install, but don't change other OSs from default
+          miniforge-version: ${{ startsWith(matrix.os, "macos") && "latest" || "" }}
           python-version: ${{ matrix.python[1] }}
         if: matrix.python[0] == 'conda'
 
