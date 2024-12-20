@@ -9,7 +9,6 @@ from collections import namedtuple
 import numpy as np
 import logging
 import re
-from . import globals
 from .globals import siemens_cas, ge_cas
 
 
@@ -44,19 +43,15 @@ def coef_file_parse(cfile, txt_var_map):
 
     modifies txt_var_map in place
     '''
-    # parse .coef file. Strip unneeded characters. a valid line in that file is
-    # broken into validline_list
-    coef_re = re.compile(r'^[^\#]')  # regex for first character not a '#'
-    coef_file = open(cfile, 'r')
-    for line in coef_file.readlines():
-        if coef_re.match(line):
-            validline_list = line.lstrip(' \t').rstrip(';\n').split()
-            if validline_list:
-                log.info('Parsed : %s' % validline_list)
-                l = validline_list
-                x = int(l[1])
-                y = int(l[2])
-                txt_var_map[l[0]][x, y] = float(l[3])
+    with open(cfile) as coef_file:
+        for line in coef_file:
+            if re.match(r'^[^#]', line):
+                fields = line.lstrip(' \t').rstrip(';\n').split()
+                if fields:
+                    log.info('Parsed : %s' % fields)
+                    x = int(fields[1])
+                    y = int(fields[2])
+                    txt_var_map[fields[0]][x, y] = float(fields[3])
 
 
 def get_siemens_coef(cfile):
@@ -96,7 +91,15 @@ def get_siemens_coef(cfile):
 def get_ge_coef(cfile):
     ''' Parse the GE .coef file.
     '''
-    txt_var_map = create_txt_var_map(coef_array_sz)
+    # R0_m has never been defined in gradunwarp for this function
+    # This function would raise a NameError if it were ever called, so
+    # let's provide a meaningful runtime error.
+    raise RuntimeError(
+        "R0_m has never been defined in gradunwarp for this function. "
+        "If you know how to determine it, please contact the developers."
+    )
+
+    txt_var_map = create_txt_var_map(ge_cas)
 
     coef_file_parse(cfile, txt_var_map)
 
@@ -107,7 +110,8 @@ def get_ge_coef(cfile):
         txt_var_map['beta_y'],
         txt_var_map['beta_x'],
         txt_var_map['beta_z'],
-        R0_m)
+        R0_m)  # noqa: F821
+
 
 def grad_file_parse(gfile, txt_var_map):
     xmax = 0
@@ -142,7 +146,6 @@ def get_siemens_grad(gfile):
     coef_array_sz = 15 if gfile.startswith('coef_AC44') else siemens_cas
 
     txt_var_map = create_txt_var_map(coef_array_sz)
-    print(txt_var_map)
 
     R0_m, max_ind = grad_file_parse(gfile, txt_var_map)
     ind = max(max_ind) + 1

@@ -24,3 +24,6 @@ push = false
 "gradunwarp/core/globals.py" = [
     "^VERSION = '{version}'"
 ]
+
+[tool.ruff.extend-per-file-ignores]
+"*/__init__.py" = ["F401"]

@@ -1,5 +1,4 @@
 import os
-import tempfile
 
 import numpy as np
 import nibabel as nb
@@ -13,7 +12,7 @@ class Arguments:
 
 
 def test_trivial_unwarp():
-    with InTemporaryDirectory() as tmpdir:
+    with InTemporaryDirectory():
         # Siemens Allegra coefficient arrays are 15x15, keeping things small and fast
         coef_file = "allegra.coef"
         open(coef_file, 'wb').close()  # touch
