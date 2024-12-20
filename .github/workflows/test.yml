@@ -117,6 +117,7 @@ jobs:
       - name: Set up Python ${{ matrix.python[1] }} (miniconda)
         uses: conda-incubator/setup-miniconda@v2
         with:
+          miniforge-version: latest
           python-version: ${{ matrix.python[1] }}
         if: matrix.python[0] == 'conda'
 
