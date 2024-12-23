@@ -1,13 +1,5 @@
 [build-system]
-requires = [
-  "setuptools",
-  # Numpy 1.25 allows back-compiling and supports 3.9
-  "numpy>=1.25; python_version >= '3.9'",
-  # Last version to support 3.6-3.8
-  "numpy==1.19; python_version > '3.0' and python_version < '3.9'",
-  # Last version to support 2.7
-  "numpy==1.16; python_version < '3.0'",
-]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.bumpver]
@@ -32,10 +24,6 @@ push = false
 "gradunwarp/core/globals.py" = [
     "^VERSION = '{version}'"
 ]
-
-[tool.cibuildwheel]
-# Do not bother building pypy wheels
-skip = "pp*"
 
 [tool.ruff.extend-per-file-ignores]
 "*/__init__.py" = ["F401"]
