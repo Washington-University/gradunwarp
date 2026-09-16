@@ -71,7 +71,7 @@ class Unwarper(object):
         vec = np.linspace(fovmin, fovmax, numpoints)
         gvx, gvy, gvz = np.meshgrid(vec, vec, vec)
         # mm
-        cf = (fovmax - fovmin) / numpoints
+        cf = (fovmax - fovmin) / (numpoints - 1)
 
         # deduce the transformation from rcs to grid
         g_rcs2xyz = np.array( [[0, cf, 0, fovmin],
