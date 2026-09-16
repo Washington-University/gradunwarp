@@ -388,7 +388,7 @@ def siemens_B(alpha, beta, r, cosine_theta, theta, phi, R0):
     return b
 
 # For consistency with GE papers, use theta & phi -> phi & theta
-def ge_D(alpha, beta, r, cosine_phi, phi, theta, z1):
+def ge_D(alpha, beta, r, cosine_phi, phi, theta):
     ''' GE Gradwarp coeffs define the error rather than the total
     gradient field'''
 
