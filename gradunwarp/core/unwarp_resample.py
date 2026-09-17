@@ -356,15 +356,12 @@ def eval_spherical_harmonics(coeffs, vendor, vxyz):
 
     return CV(bx * R0, by * R0, bz * R0), CV(x, y, z)
 
-
+# Convert to spherical coordinates
 def cart2sph(x1, y1, z1):
-    x1 = x1 + 0.0001  # hack to avoid singularities at R=0
-    # convert to spherical coordinates
-    r = np.sqrt(x1 * x1 + y1 * y1 + z1 * z1)
-    cosine_theta = z1 / r
+    r = np.hypot(np.hypot(x1, y1), z1)
+    cosine_theta = z1 / np.where(r != 0.0, r, 1.0)
     theta = np.arccos(cosine_theta)
-    phi = np.arctan2(y1 / r, x1 / r)
-
+    phi = np.arctan2(y1, x1)
     return r, cosine_theta, theta, phi
 
 def siemens_B(alpha, beta, r, cosine_theta, theta, phi, R0):
