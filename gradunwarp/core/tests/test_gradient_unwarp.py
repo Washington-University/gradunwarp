@@ -4,7 +4,7 @@ import numpy as np
 import nibabel as nb
 from nibabel.tmpdirs import InTemporaryDirectory
 
-from ..gradient_unwarp import GradientUnwarpRunner
+from gradunwarp.core.gradient_unwarp import GradientUnwarpRunner
 
 
 class Arguments:
