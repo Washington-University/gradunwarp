@@ -72,6 +72,7 @@ class Unwarper(object):
         gvx, gvy, gvz = np.meshgrid(vec, vec, vec)
         # mm
         cf = (fovmax - fovmin) / (numpoints - 1)
+        grid_spacing = CV(cf, cf, cf)
 
         # deduce the transformation from rcs to grid
         g_rcs2xyz = np.array( [[0, cf, 0, fovmin],
@@ -88,7 +89,7 @@ class Unwarper(object):
         gvxyz = CV(gvx, gvy, gvz)
         _dv, _dxyz = eval_spherical_harmonics(coeffs, vendor, gvxyz)
 
-        return CV(_dv.x, _dv.y, _dv.z), g_xyz2rcs
+        return CV(_dv.x, _dv.y, _dv.z), g_xyz2rcs, grid_spacing
 
 
     def run(self):
@@ -101,7 +102,7 @@ class Unwarper(object):
             self.polarity = -1.
 
         # Evaluate spherical harmonics on a smaller grid
-        dv, g_xyz2rcs = self.eval_spharm_grid(self.vendor, self.coeffs)
+        dv, g_xyz2rcs, grid_spacing = self.eval_spharm_grid(self.vendor, self.coeffs)
 
         # transform RAS-coordinates into LAI-coordinates
         m_ras2lai = np.array([[-1.0, 0.0, 0.0, 0.0],
@@ -136,9 +137,9 @@ class Unwarper(object):
         # do the nonlinear unwarp
         if self.vendor == 'siemens':
             self.out, self.vjacout = self.non_linear_unwarp_siemens(self.vol.shape, dv, dxyz,
-                                                                 m_rcs2lai, m_rcs2lai_nohalf, g_xyz2rcs)
+                                                                    m_rcs2lai, m_rcs2lai_nohalf, g_xyz2rcs, grid_spacing)
 
-    def non_linear_unwarp_siemens(self, volshape, dv, dxyz, m_rcs2lai, m_rcs2lai_nohalf, g_xyz2rcs):
+    def non_linear_unwarp_siemens(self, volshape, dv, dxyz, m_rcs2lai, m_rcs2lai_nohalf, g_xyz2rcs, grid_spacing):
         ''' Performs the crux of the unwarping.
         It's agnostic to Siemens or GE and uses more functions to
         do the processing separately.
@@ -168,7 +169,7 @@ class Unwarper(object):
             if dxyz == 0:
                 vjacdet_lps = 1
             else:
-                vjacdet_lps = eval_siemens_jacobian_mult(dv, dxyz)
+                vjacdet_lps = eval_siemens_jacobian_mult(dv, grid_spacing)
 
         # essentially pre-allocating everything
         out = np.empty((nr, nc, ns), dtype=np.float32)
